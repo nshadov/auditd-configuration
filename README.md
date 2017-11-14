@@ -1,2 +1,2 @@
-# auditd-coniguration
+# auditd-configuration
 Basic auditd configuration.
