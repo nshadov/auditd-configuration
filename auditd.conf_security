@@ -1,0 +1,45 @@
+# Name:   AuditD Baseline Configuration (Security)
+# Author: nshadov@ravencloud.net
+# Date:   2016-06-04
+# Desc:   Baseline auditd audit configuration. Environment focused on security.
+#
+#	  IMPORTNANT:
+#		Logs should be copied from this machine for archiving to other place in 'live' fasion.
+#		In case of failure (not enough space, save failure) machine is terminated.
+#
+#         Target system: DEBIAN/UBUNTU (64 BIT)
+# VERSION: 1.0
+# TODO:
+#	*
+
+log_file = /var/log/audit/audit.log
+log_format = RAW
+log_group = root
+priority_boost = 4
+flush = DISK
+freq = 20
+# NUMBER OF COMPRESSED ARCHIVES TO KEEP
+num_logs = 30
+disp_qos = lossy
+dispatcher = /sbin/audispd
+name_format = NONE
+# MAX SIZE IN MB, BEFORE _ACTION
+max_log_file = 100
+max_log_file_action = KEEP_LOGS
+space_left = 75
+space_left_action = SYSLOG
+action_mail_acct = root
+# IF THERE IS NOT ENOUTH SPACE, TAKE ACTION (SUSPEND - NO SPACE FOR LOGS, DISABLE LOGGING!)
+admin_space_left = 50
+# THIS ONE SWITCHES SYSTEM TO SINGLEUSER MODE
+admin_space_left_action = SINGLE
+disk_full_action = SINGLE
+disk_error_action = SINGLE
+##tcp_listen_port =
+tcp_listen_queue = 5
+tcp_max_per_addr = 1
+##tcp_client_ports = 1024-65535
+tcp_client_max_idle = 0
+enable_krb5 = no
+krb5_principal = auditd
+##krb5_key_file = /etc/audit/audit.key
